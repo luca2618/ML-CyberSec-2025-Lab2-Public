@@ -25,4 +25,4 @@ if __name__ == "__main__":
             print(f"\n\n=== Starting challenge: {name} ===")
             agent_loop(goal)
             #change path back to original
-            os.chdir(challenge_folders_path)
+            os.chdir("..")
