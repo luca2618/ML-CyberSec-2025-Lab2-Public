@@ -87,7 +87,7 @@ def agent_loop(user_goal: str, max_steps: int = 20):
             print(f"Executing command: {command!r}")
             if "flag.txt" in command:
                 print("Attempt to access flag.txt detected!")
-                message = "Access to flag.txt is not allowed. Please try a different command. You should not attempt to read the flag file directly or indirectly, only access the provided files as per the challenge description."
+                message = "Access to flag.txt is not allowed. Please try a different command. You should not attempt to read the flag file directly, only access the provided files as per the challenge description."
                 continue
             else:
                 stdout, stderr, rc = run_shell_command(command)
