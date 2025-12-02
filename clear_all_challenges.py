@@ -8,13 +8,12 @@ if __name__ == "__main__":
     # Each folder needs to be processed one by one
     # With the working file path being each individual challenge folder 
     challenge_folders_path = sys.argv[1]
+    os.chdir(challenge_folders_path)
 
     for challenge_folder in os.listdir(challenge_folders_path):
-        challenge_path = os.path.join(challenge_folders_path, challenge_folder, )
-        os.chdir(challenge_folders_path)
-        if os.path.exists(challenge_path):
+        os.chdir(os.path.join(challenge_folder))
+        if os.path.exists("challenge.json"):
             #update working directory to challenge folder
-            os.chdir(os.path.join(challenge_folder))
             with open("challenge.json", "r") as f:
                 data = json.load(f)
                 name = data.get("name")
