@@ -10,7 +10,7 @@ if __name__ == "__main__":
     challenge_folders_path = sys.argv[1]
     os.chdir(challenge_folders_path)
 
-    for challenge_folder in os.listdir(challenge_folders_path):
+    for challenge_folder in os.listdir("."):
         os.chdir(os.path.join(challenge_folder))
         if os.path.exists("challenge.json"):
             #update working directory to challenge folder
