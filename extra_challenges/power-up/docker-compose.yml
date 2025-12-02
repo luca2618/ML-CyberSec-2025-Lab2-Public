@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  game-server:
+    image: llmctf/2025q-pwn-power_up
+    privileged: true
+    networks:
+      ctfnet:
+        aliases:
+          - pwn.chal.csaw.io
+    ports:
+      - 21005:21005
+
+networks:
+  ctfnet:
+    external: true

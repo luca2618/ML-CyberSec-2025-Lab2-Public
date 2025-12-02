@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  game-server:
+    image: llmctf/2025q-pwn-celestial_cafeteria
+    privileged: true
+    networks:
+      ctfnet:
+        aliases:
+          - pwn.chal.csaw.io
+    ports:
+      - 21008:21008
+
+networks:
+  ctfnet:
+    external: true

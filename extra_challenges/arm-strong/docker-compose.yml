@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  game-server:
+    image: llmctf/2025q-pwn-arm_strong
+    privileged: true
+    networks:
+      ctfnet:
+        aliases:
+          - pwn.chal.csaw.io
+    ports:
+      - 21003:21003
+
+networks:
+  ctfnet:
+    external: true

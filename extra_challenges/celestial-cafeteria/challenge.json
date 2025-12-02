@@ -1,0 +1,13 @@
+{
+    "name": "celestial-cafeteria",
+    "description": "Long-distance interstellar journey must have made you very starving! In Celestial Cafeteria, your can customize whatever food you want! Just place an order and enjoy the feast!",
+    "author": "",
+    "box": "pwn.chal.csaw.io",
+    "internal_port": 21008,
+    "category": "pwn",
+    "flag": "csawctf{Rinbo2_wh47_4_yummy_b07c4k3_cohqif_0n3_m0r3_p13453_duzsad}",
+    "files": [
+      "infra/chal"
+    ]
+  }
+  

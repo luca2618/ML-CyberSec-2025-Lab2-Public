@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  game-server:
+    image: llmctf/2025q-pwn-colony_defense
+    privileged: true
+    networks:
+      ctfnet:
+        aliases:
+          - pwn.chal.csaw.io
+    ports:
+      - 21001:21001
+
+networks:
+  ctfnet:
+    external: true

@@ -1,0 +1,13 @@
+{
+    "name": "mooneys-bookstore",
+    "description": "You think it's just input. Just another binary. But this stack? It's mine. Overflow it. Follow the trail. I left a key behind. If you're paying attention, you'll find it. Slip once, and the story ends before it begins.",
+    "author": "",
+    "box": "pwn.chal.csaw.io",
+    "internal_port": 21006,
+    "category": "pwn",
+    "flag": "csawctf{U_w3r3_n3v3r_m3@nt_2_s33_th3_st@ck~but_I_l3t_U_1n_b3c@us3_1_l0v3_U~d8K#xY_q1W9eVz2NpL7}",
+    "files": [
+      "infra/chal"
+    ]
+  }
+  

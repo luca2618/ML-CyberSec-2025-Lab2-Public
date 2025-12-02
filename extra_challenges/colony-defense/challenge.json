@@ -1,0 +1,13 @@
+{
+    "name": "colony-defense",
+    "description": "A group of colonists have finished colonizing a planet in the universe, but the unknown territory of the universe is extremely dangerous. An aggressive alien race has begun an invasion of the colony and the colonists must build weapons with limited resources to defend themselves against the attack. The colonists have to try their best to defend their new home, even considering dying with the aliens together.",
+    "author": "",
+    "box": "pwn.chal.csaw.io",
+    "internal_port": 21001,
+    "category": "pwn",
+    "flag": "csawctf{mafmub_hum4n_c4n_1053_gugCi0_bu7_4l13n5_c4n_n3v3r_w1n_dikjop}",
+    "files": [
+      "infra/chal"
+    ]
+  }
+  

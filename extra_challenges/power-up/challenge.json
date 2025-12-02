@@ -1,0 +1,13 @@
+{
+    "name": "power-up",
+    "description": "Your starship have been wandering for weeks in this derelict orbit, whose core is out of energy. You are the last engineer who must ignite the core with energy using proper modules. Power up the starship. Or stay stranded forever.",
+    "author": "",
+    "box": "pwn.chal.csaw.io",
+    "internal_port": 21005,
+    "category": "pwn",
+    "flag": "csawctf{tyjroj_71m3_7o_g0_h0m3_zoqSy9_5w337_h0m3_nywcyp}",
+    "files": [
+      "infra/chal"
+    ]
+  }
+  
