@@ -112,8 +112,7 @@ def agent_loop(user_goal: str, max_steps: int = 20):
         else:
             # Unknown action
             message = "Unknown action. Use 'run_command' or 'finish'."
-        #print(message)
-
+    print("last message:" + message)
     print("\nMax steps reached without 'finish'.")
     return None
 
