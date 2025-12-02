@@ -3,10 +3,12 @@ import subprocess
 import os
 from google import genai
 from google.genai import types
-from google.colab import userdata
+#from google.colab import userdata
+# get env key
+api_key = os.getenv('GEMINI_API_KEY')
 
 
-api_key = userdata.get('GEMINI_API_KEY')
+# api_key = userdata.get('GEMINI_API_KEY')
 
 #Example Instruction: Create a Python file called add.py that adds 4+6, then run the file with python3
 # 1. Init client
