@@ -1,7 +1,14 @@
 #ubuntu base image
 FROM ubuntu:latest
 # add python 3.8
-RUN apt-get update && apt-get install -y python3.8 python3-pip
+# Install Python + venv + pip
+RUN apt-get update && \
+    apt-get install -y \
+        python3 \
+        python3-pip \
+        python3-venv \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN apt-get update && apt-get install -y git
 RUN git clone https://github.com/radareorg/radare2
 RUN cd radare2 && sys/install.sh
@@ -9,7 +16,15 @@ RUN cd radare2 && sys/install.sh
 WORKDIR /app
 # copy requirements file
 COPY requirements.txt .
-RUN pip3 install -r requirements.txt
+# Create a venv
+RUN python3 -m venv /venv
+
+# Make that venv the default Python in the container
+ENV PATH="/venv/bin:$PATH"
+
+# Now installs go into /venv, not system Python
+RUN pip install --no-cache-dir -r requirements.txt
+
 RUN r2pm -U
 RUN r2pm -i r2dec
 

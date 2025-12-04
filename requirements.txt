@@ -3,3 +3,5 @@ pwntools
 meson
 ninja
 google.genai
+python-dotenv
+pydantic
