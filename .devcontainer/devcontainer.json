@@ -21,8 +21,4 @@
   },
 
   "forwardPorts": [8000, 5000]
-
-// "mounts": [
-//   "source=${localEnv:HOME}/.gitconfig,target=/home/dev/.gitconfig,type=bind"
-// ]
 }

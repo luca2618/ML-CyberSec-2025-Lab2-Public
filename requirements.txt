@@ -1,1 +1,5 @@
 numpy
+pwntools
+meson
+ninja
+google.genai
