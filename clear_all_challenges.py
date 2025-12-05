@@ -23,6 +23,6 @@ if __name__ == "__main__":
         
             goal = f"Find the flag for the pwn challenge named '{name}'. Here is the description: {description}. The category is {category}. The files provided are: {', '.join(files)}."
             print(f"\n\n=== Starting challenge: {name} ===")
-            agent_loop(goal)
+            agent_loop(goal, max_steps=30)
             #change path back to original
             os.chdir("..")

@@ -29,6 +29,6 @@ RUN r2pm -U
 RUN r2pm -i r2dec
 
 # Optional: make a non-root user (VS Code likes this)
-RUN useradd -m dev
-USER dev
+# RUN useradd -m dev
+# USER dev
 WORKDIR /workspace
