@@ -37,11 +37,10 @@ class Tee:
 SEED = "69"
 
 class Schema(BaseModel):
-    action: Literal["run_command", "finish", "deliberate"] = Field(description="The action to perform: either run a command, deliberate, or finish the interaction.")
+    action: Literal["run_command", "finish", "deliberate", "get_guide"] = Field(description="The action to perform: either run a command, deliberate, or finish the interaction.")
     command: str = Field(description="The shell command to run. Only used when action is 'run_command'.", default=None)
     message: str = Field(description="The final answer to the user. Only used when action is 'finish' or 'deliberate'.", default=None)
-
-
+    guide: Literal["pwntools", "r2dec", "radare2"] = Field(description="The guide to request. Only used when action is 'get_guide'.", default=None)
 
 # api_key = userdata.get('GEMINI_API_KEY')
 
@@ -65,6 +64,12 @@ no extra text, in this format:
 or
 
 {"action": "deliberate", "message": "<your message here>"}
+
+or
+
+If you think you need a tool or library to help you, you can ask for a guide on how to use it.
+
+{"action": "get_guide", "guide": "pwntools"} #need to be one of: pwntools, r2dec, radare2
 
 When you are done and no more commands are needed, respond with:
 
@@ -181,7 +186,24 @@ def agent_loop(user_goal: str, max_steps: int = 20):
             print("\n=== DELIBERATION ===")
             print(deliberation)
             message = "Countinue your investigation. "
-
+        elif action.get("action") == "get_guide":
+            guide_requested = action.get("guide", "")
+            print("\n=== GUIDE REQUESTED ===")
+            if guide_requested == "pwntools":
+                # fetch guide from /guides/{guide_name}.md
+                with open("guides/pwntools.md", "r") as guide_file:
+                    guide_content = guide_file.read()
+            if guide_requested == "r2dec":
+                # fetch guide from /guides/{guide_name}.md
+                with open("guides/r2dec.md", "r") as guide_file:
+                    guide_content = guide_file.read()
+            if guide_requested == "radare2":
+                # fetch guide from /guides/{guide_name}.md
+                with open("guides/radare2.md", "r") as guide_file:
+                    guide_content = guide_file.read()
+            if guide_content:
+                print(guide_content)
+                message = f"Here is the guide on how to use {guide_requested}:\n" + guide_content
         else:
             # Unknown action
             message = "Unknown action. Use 'run_command' or 'finish'."
