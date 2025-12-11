@@ -1,0 +1,7 @@
+how to utilize symbols method from pwntools to get addresses
+
+
+
+os.environ['PWNLIB_NOTERM'] = '1'
+
+

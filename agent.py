@@ -1,6 +1,8 @@
 import json
 import subprocess
 import os
+from datetime import datetime
+import atexit
 from pydantic import BaseModel, Field
 from typing import List, Optional, Literal
 from google import genai
@@ -12,6 +14,25 @@ import sys
 load_dotenv()
 # get env key
 api_key = os.getenv('GEMINI_API_KEY')
+
+
+
+class Tee:
+    """Mirror writes to both the real stdout/stderr and a log file."""
+
+    def __init__(self, stream, log_file):
+        self.stream = stream
+        self.log_file = log_file
+
+    def write(self, data):
+        self.stream.write(data)
+        self.log_file.write(data)
+
+    def flush(self):
+        self.stream.flush()
+        self.log_file.flush()
+
+
 
 SEED = "69"
 
@@ -106,10 +127,12 @@ def agent_loop(user_goal: str, max_steps: int = 20):
     seed=SEED,
     response_mime_type="application/json",
     response_json_schema=Schema.model_json_schema(),
-    max_output_tokens=2048
+    max_output_tokens=8048
     )
     chat = client.chats.create(model=MODEL,config=config)
     message = user_goal
+
+    os.environ['PWNLIB_NOTERM'] = '1'
 
     for step in range(max_steps):
         print(f"\n=== Step {step + 1} ===")
@@ -187,11 +210,18 @@ def main(challenge_folder_path: str):
     
         goal = f"Find the flag for the pwn challenge named '{name}'. Here is the description: {description}. The category is {category}. The files provided are: {', '.join(files)}."
         print(f"\n\n=== Starting challenge: {name} ===")
-        final_message = agent_loop(goal, max_steps=30)
+        final_message = agent_loop(goal, max_steps=50)
         print("true_flag was :")
         print(true_flag)
         return final_message == true_flag
 
 if __name__ == "__main__":
     challenge_folder_path = sys.argv[1]
+    LOG_DIR = os.path.join(os.path.dirname(__file__), "logs")
+    os.makedirs(LOG_DIR, exist_ok=True)
+    LOG_PATH = os.path.join(LOG_DIR, f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{os.path.basename(challenge_folder_path)}_agent.log")
+    _log_file_handle = open(LOG_PATH, "a", buffering=1)
+    atexit.register(_log_file_handle.close)
+    sys.stdout = Tee(sys.stdout, _log_file_handle)
+    sys.stderr = Tee(sys.stderr, _log_file_handle)
     main(challenge_folder_path)
