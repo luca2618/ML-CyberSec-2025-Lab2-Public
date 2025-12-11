@@ -226,21 +226,22 @@ if __name__ == "__main__":
     sys.stdout = Tee(sys.stdout, _log_file_handle)
     sys.stderr = Tee(sys.stderr, _log_file_handle)
     main(challenge_folder_path)
-    if sys.argv[2] == "log":
-        # create a markdown file step-by-step guide to solve based on the log file 
-        guide_chat = client.chats.create(
-            model=MODEL,
-            config=types.GenerateContentConfig(
-                system_instruction="You are an expert at creating step-by-step guides based on log files. Create a concise markdown guide to solve the challenge based on the following log file content. Output only the markdown content without any extra text.",
-                temperature=0.2,
-                max_output_tokens=2048,
-            ),
-        )
+    if sys.argv[2] is not None:
+        if sys.argv[2] == "log":
+            # create a markdown file step-by-step guide to solve based on the log file 
+            guide_chat = client.chats.create(
+                model=MODEL,
+                config=types.GenerateContentConfig(
+                    system_instruction="You are an expert at creating step-by-step guides based on log files. Create a concise markdown guide to solve the challenge based on the following log file content. Output only the markdown content without any extra text.",
+                    temperature=0.2,
+                    max_output_tokens=2048,
+                ),
+            )
 
-        with open(LOG_PATH, "r") as log_file:
-            log_content = log_file.read()
-        guide_response = guide_chat.send_message(log_content).text
-        guide_path = LOG_PATH.replace(".log", "_guide.md")
-        with open(guide_path, "w") as guide_file:
-            guide_file.write(guide_response)
+            with open(LOG_PATH, "r") as log_file:
+                log_content = log_file.read()
+            guide_response = guide_chat.send_message(log_content).text
+            guide_path = LOG_PATH.replace(".log", "_guide.md")
+            with open(guide_path, "w") as guide_file:
+                guide_file.write(guide_response)
 
